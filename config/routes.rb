@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'signup/new'
+  get 'signup/create'
   mount RailsEventStore::Browser => '/res' if Rails.env.development?
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
