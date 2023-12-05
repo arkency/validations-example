@@ -5,7 +5,9 @@ class NewSignup
   attribute :email, :string
   attribute :password, :string
 
+  validates :password, length: { minimum: 8 }
+
   def model_name
-    ActiveModel::Name.new(nil, nil, 'Signup')
+    ActiveModel::Name.new(nil, nil, "Signup")
   end
 end
