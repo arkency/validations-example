@@ -1,7 +1,5 @@
 class SignupsController < ApplicationController
-  def new
-    render :new, locals: { signup: NewSignup.new }
-  end
+  def new = render :new, locals: { signup: NewSignup.new }
 
   def create
     new_signup = NewSignup.new(signup_params)
@@ -16,7 +14,5 @@ class SignupsController < ApplicationController
 
   private
 
-  def signup_params
-    params.require(:signup).permit(:email, :password)
-  end
+  def signup_params = params.require(:signup).permit(:email, :password)
 end
