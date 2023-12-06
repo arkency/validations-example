@@ -21,9 +21,7 @@ Rails.configuration.to_prepare do
     store.subscribe_to_all_events(RailsEventStore::LinkByCausationId.new)
   end
 
-  # Register command handlers below
-  # Rails.configuration.command_bus.tap do |bus|
-  #   bus.register(PrintInvoice, Invoicing::OnPrint.new)
-  #   bus.register(SubmitOrder, ->(cmd) { Ordering::OnSubmitOrder.new.call(cmd) })
-  # end
+  Rails.configuration.command_bus.tap do |bus|
+    bus.register(IdentityAndAccess::RegisterUser, Proc.new {})
+  end
 end
