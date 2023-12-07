@@ -13,8 +13,15 @@ class SignupControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to signups_path
   end
 
-  test " should render signup form with errors" do
+  test "should render signup form with errors" do
     post signups_path, params: { signup: { email: "joe@example.com", password: "pass" } }
+
+    assert_response :unprocessable_entity
+  end
+
+  test "don't allow to create user with the same email" do
+    post signups_path, params: { signup: { email: "joe@example.com", password: "password" } }
+    post signups_path, params: { signup: { email: "joe@example.com", password: "password" } }
 
     assert_response :unprocessable_entity
   end

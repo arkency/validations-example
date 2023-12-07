@@ -11,6 +11,8 @@ class SignupsController < ApplicationController
     else
       render :new, locals: { signup: new_signup }, status: :unprocessable_entity
     end
+  rescue IdentityAndAccess::UserAlreadyRegistered
+    handle_this_rare_case_of_duplicate_email(new_signup)
   end
 
   def index = ()
@@ -20,4 +22,9 @@ class SignupsController < ApplicationController
   def signup_params = params.require(:signup).permit(:email, :password)
 
   def command_bus = Rails.configuration.command_bus
+
+  def handle_this_rare_case_of_duplicate_email(new_signup)
+    new_signup.errors.add(:email, "has already been taken")
+    render :new, locals: { signup: new_signup }, status: :unprocessable_entity
+  end
 end
