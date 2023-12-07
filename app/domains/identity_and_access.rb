@@ -6,9 +6,7 @@ module IdentityAndAccess
   UserAlreadyRegistered = Class.new(StandardError)
 
   class UserRegistration
-    def initialize(event_store)
-      @event_store = event_store
-    end
+    def initialize(event_store) = @event_store = event_store
 
     def call(command)
       event = UserRegistered.new(data: { email: command.email })
