@@ -1,24 +1,23 @@
-# README
+# Validations example
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This sample app shows how to validate user input on various app layers.
 
-Things you may want to cover:
+Validations included:
 
-* Ruby version
+* default HTML5 validations (presence, etc.)
+* form object taking care of basic input validations
+* command handler taking care of business logic validations (uniqueness) without involving
+  typical Rails model validations, but utilising the concept
+  of [interim streams](https://blog.scooletz.com/2016/11/21/event-sourcing-and-interim-streams/)
+  in a way [RailsEventStore](https://railseventstore.org/docs/v2/expected_version/#integer) supports this concept.
 
-* System dependencies
+Last, but not least: 0 ActiveRecord models given.
 
-* Configuration
+## Setup
 
-* Database creation
+```shell
+bin/setup
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+bin/dev
+```
+    
