@@ -5,7 +5,7 @@ class SignupsController < ApplicationController
     new_signup = NewSignup.new(signup_params)
 
     if new_signup.valid?
-      command_bus.call(IdentityAndAccess::RegisterUser.new(new_signup.email, new_signup.password))
+      register_user(new_signup)
 
       redirect_to signups_path
     else
@@ -27,6 +27,11 @@ class SignupsController < ApplicationController
 
   def handle_this_rare_case_of_duplicate_email(new_signup)
     new_signup.errors.add(:email, "has already been taken")
+
     render :new, locals: { signup: new_signup }, status: :unprocessable_entity
+  end
+
+  def register_user(new_signup)
+    command_bus.call(IdentityAndAccess::RegisterUser.new(new_signup.email, new_signup.password))
   end
 end
